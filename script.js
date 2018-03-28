@@ -32,11 +32,11 @@ function search() {
     var locater = query.substring(0, 3);
     var searchtext = query.substring(3);
 
-    if (locater == '!d ') {
-        window.location = 'https://duckduckgo.com/?q=' + searchtext;
+    if (locater == '!g ') {
+        window.location = 'https://google.de/search?q=' + searchtext;
     } 
-    else if (locater == '!k ') {
-        window.location = 'https://kat.cr/usearch/' + searchtext;
+    else if (locater == '!s ') {
+        window.location = 'https://stackoverflow.com/search?q=' + searchtext;
     } 
     else if (locater == '!p ') {
         window.location = 'https://thepiratebay.se/search/' + searchtext;
@@ -48,12 +48,16 @@ function search() {
         weatheris();
     } 
     else {
-        window.location = 'https://google.co.in/search?q=' + query;
+        window.location = 'https://duckduckgo.com/?q=' + query;
     }
 }
 
 function weatheris() {
-    var searchtext = searchbox.value.substring(3);
+    if (searchbox.value.substring(3) == "") {
+        var searchtext = "10961";
+    } else {
+        var searchtext = searchbox.value.substring(3);
+    }
     $.getJSON('http://api.openweathermap.org/data/2.5/find?q=' + searchtext + '&units=metric&appid=' + openweatherapikey, function(data) {
         var generalweather = data.list[0].main;
         var descweather = data.list[0].weather[0].description;
